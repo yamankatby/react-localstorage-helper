@@ -1,12 +1,26 @@
 export type LocalStorageListener<T> = (storage: T, prevStorage: T) => void;
 
-const createLocalstorage = <T>(initialStorage: T) => {
+const invokeListeners = <T>(listeners: Array<LocalStorageListener<T>>, storage: T, prevStorage: T) => {
+  listeners.forEach(listener => listener(storage, prevStorage));
+};
+
+const createLocalstorage = <T>(initialStorage: T, enableLogger: boolean = false, storageName = 'rootStorage') => {
   let storage: T = { ...initialStorage };
   let listeners: Array<LocalStorageListener<T>> = [];
 
-  const invokeListeners = (storage: T, prevStorage: T) => {
-    listeners.forEach(listener => listener(storage, prevStorage));
+  const rehydrateLocalStorage = () => {
+    const jsonStorage = localStorage.getItem(storageName);
+    if (jsonStorage !== null) {
+      storage = JSON.parse(jsonStorage);
+    } else {
+      updateLocalStorage(initialStorage, initialStorage);
+    }
   };
+  const updateLocalStorage = (storage: T, prevStorage: T) => {
+    localStorage.setItem(storageName, JSON.stringify(storage));
+    invokeListeners(listeners, storage, prevStorage);
+  };
+  rehydrateLocalStorage();
 
   const getStorage = () => {
     return storage;
@@ -15,7 +29,7 @@ const createLocalstorage = <T>(initialStorage: T) => {
     const prevStorage = storage;
     storage = { ...storage, ...newStorage };
 
-    invokeListeners(storage, prevStorage);
+    updateLocalStorage(storage, prevStorage);
   };
   const getItem = (key: keyof T) => {
     return storage[key];
@@ -24,7 +38,7 @@ const createLocalstorage = <T>(initialStorage: T) => {
     const prevStorage = storage;
     storage[key] = value;
 
-    invokeListeners(storage, prevStorage);
+    updateLocalStorage(storage, prevStorage);
   };
   const subscribe = (listener: LocalStorageListener<T>) => {
     listeners.push(listener);
@@ -32,7 +46,6 @@ const createLocalstorage = <T>(initialStorage: T) => {
       listeners = listeners.filter(l => l !== listener);
     };
   };
-
   return { getStorage, setStorage, getItem, setItem, subscribe };
 };
 
