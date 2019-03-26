@@ -1,7 +1,7 @@
 {
  "name": "react-localstorage-helper",
  "version": "0.0.3",
- "main": "index.js",
+ "main": "lib/index.js",
  "license": "MIT",
  "files": [
   "lib/**/*"

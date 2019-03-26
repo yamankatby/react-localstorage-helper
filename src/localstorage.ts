@@ -1,6 +1,24 @@
-import { localstorageLogger } from './localstorageLogger';
-
 export type LocalStorageListener<T> = (storage: T, prevStorage: T) => void;
+
+const logger = (storage: any, prevStorage: any) => {
+  let changedItemKey = '*';
+  let changedItemFrom = '*';
+  let changedItemTo = '*';
+
+  Object.keys(prevStorage).forEach(key => {
+    const changed = JSON.stringify(prevStorage[key]) !== JSON.stringify(storage[key]);
+    if (changed) {
+      changedItemKey = key;
+      changedItemFrom = prevStorage[key];
+      changedItemTo = storage[key];
+    }
+  });
+
+  console.group(`change ${changedItemKey} from ${changedItemFrom} to ${changedItemTo}`);
+  console.log('prev storage', prevStorage);
+  console.log('next storage', storage);
+  console.groupEnd();
+};
 
 const invokeListeners = <T>(listeners: Array<LocalStorageListener<T>>, storage: T, prevStorage: T) => {
   listeners.forEach(listener => listener(storage, prevStorage));
@@ -55,7 +73,7 @@ const createLocalstorage = <T>(initialStorage: T, loggerEnabled: boolean = true,
   };
 
   if (loggerEnabled) {
-    subscribe(localstorageLogger);
+    subscribe(logger);
   }
 
   return { getStorage, setStorage, getItem, setItem, subscribe };
