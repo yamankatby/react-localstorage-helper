@@ -8,37 +8,42 @@ const createLocalstorage = <T>(initialStorage: T, enableLogger: boolean = false,
   let storage: T = { ...initialStorage };
   let listeners: Array<LocalStorageListener<T>> = [];
 
-  const rehydrateLocalStorage = () => {
-    const jsonStorage = localStorage.getItem(storageName);
-    if (jsonStorage !== null) {
-      storage = JSON.parse(jsonStorage);
-    } else {
-      updateLocalStorage(initialStorage, initialStorage);
-    }
-  };
-  const updateLocalStorage = (storage: T, prevStorage: T) => {
-    localStorage.setItem(storageName, JSON.stringify(storage));
-    invokeListeners(listeners, storage, prevStorage);
-  };
-  rehydrateLocalStorage();
+  const controller = (() => {
+    const reflect = (prevStorage: T) => {
+      const immutablePrevStorage = { ...prevStorage };
+      return (storage: T) => {
+        const immutableStorage = { ...storage };
+        localStorage.setItem(storageName, JSON.stringify(storage));
+        invokeListeners(listeners, immutableStorage, immutablePrevStorage);
+      };
+    };
+    const rehydrate = () => {
+      const jsonStorage = localStorage.getItem(storageName);
+      if (jsonStorage !== null) {
+        reflect(storage)({ ...storage, ...JSON.parse(jsonStorage) });
+      } else {
+        reflect(initialStorage)(initialStorage);
+      }
+    };
+    return { reflect, rehydrate };
+  })();
+  controller.rehydrate();
 
   const getStorage = () => {
     return storage;
   };
   const setStorage = (newStorage: any) => {
-    const prevStorage = storage;
+    const reflector = controller.reflect(storage);
     storage = { ...storage, ...newStorage };
-
-    updateLocalStorage(storage, prevStorage);
+    reflector(storage);
   };
   const getItem = (key: keyof T) => {
     return storage[key];
   };
   const setItem = (key: keyof T, value: any) => {
-    const prevStorage = storage;
+    const reflector = controller.reflect(storage);
     storage[key] = value;
-
-    updateLocalStorage(storage, prevStorage);
+    reflector(storage);
   };
   const subscribe = (listener: LocalStorageListener<T>) => {
     listeners.push(listener);

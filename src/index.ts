@@ -1,1 +1,3 @@
-export const Greeter = (name: string) => `Hello ${name}`;
+import createLocalStorage from './localstorage';
+
+export { createLocalStorage };
