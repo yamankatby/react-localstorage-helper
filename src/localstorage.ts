@@ -1,10 +1,12 @@
+import { localstorageLogger } from './localstorageLogger';
+
 export type LocalStorageListener<T> = (storage: T, prevStorage: T) => void;
 
 const invokeListeners = <T>(listeners: Array<LocalStorageListener<T>>, storage: T, prevStorage: T) => {
   listeners.forEach(listener => listener(storage, prevStorage));
 };
 
-const createLocalstorage = <T>(initialStorage: T, enableLogger: boolean = false, storageName = 'rootStorage') => {
+const createLocalstorage = <T>(initialStorage: T, loggerEnabled: boolean = true, storageName = 'rootStorage') => {
   let storage: T = { ...initialStorage };
   let listeners: Array<LocalStorageListener<T>> = [];
 
@@ -51,6 +53,11 @@ const createLocalstorage = <T>(initialStorage: T, enableLogger: boolean = false,
       listeners = listeners.filter(l => l !== listener);
     };
   };
+
+  if (loggerEnabled) {
+    subscribe(localstorageLogger);
+  }
+
   return { getStorage, setStorage, getItem, setItem, subscribe };
 };
 
