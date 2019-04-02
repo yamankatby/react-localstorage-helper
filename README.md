@@ -24,7 +24,9 @@ Access localStorage easily inside your React component.
 - Listen to changes easily just by pass a `Callback function` 🔉.
 - No need to worry about encoding data to `JSON` and decoding it back.
 
-![react-native-js-tableview Android Screenshot](https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)(https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)
+![react-native-js-tableview Android Screenshot](https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)
+
+## Documentation
 
 ### Function components (With Hooks) ⚓.
 
@@ -50,8 +52,6 @@ const App = () => {
 };
 
 ```
-
-## Documentation
 
 ### Class components (With Callback Function) 🔉.
 
