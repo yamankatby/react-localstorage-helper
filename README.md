@@ -110,7 +110,7 @@ const [value, setValue] = useLocalStorage(key, initialValue);
 
 During the initial render, the returned value (`value`) will be the same as the value passed as the secound argument (`initialState`) if there is no data stored in the localStorage.
 
-#### Lazy initial value
+### Lazy initial value
 
 The `initialValue` argument is the value used during the initial render if there is no stored value in the localStorage. In subsequent renders, it is disregarded. If the initial value is the result of an expensive computation, you may provide a function instead, which will be executed only on the initial render:
 
@@ -134,7 +134,7 @@ const [value, setValue] = useLocalStorage('__key__', () => {
 });
 ```
 
-#### Functional updates
+### Functional updates
 If the new value is computed using the previous value, you can pass a function to `setValue`. The function will receive the previous value, and return an updated value. Here’s an example:
 
 **Class component:**
