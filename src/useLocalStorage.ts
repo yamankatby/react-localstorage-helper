@@ -1,33 +1,25 @@
 import { Dispatch, useState } from 'react';
+import localstorage from './utilities/localstorage';
 
-const setItem = <T>(key: string, value: T): void => {
-  const serializedValue = JSON.stringify(value);
-  localStorage.setItem(key, serializedValue);
-};
-const getItem = <T>(key: string): T | null => {
-  const serializedValue = localStorage.getItem(key);
-  if (serializedValue !== null) {
-    return JSON.parse(serializedValue);
-  }
+type IUseLocalStorage<T> = [T, Dispatch<T>];
 
-  return null;
-};
+const useLocalStorage = <T>(key: string, initialValue: T | (() => T)): IUseLocalStorage<T> => {
+  const storageManager = localstorage<T>(key);
 
-const useLocalStorage = <T>(key: string, initialValue: T | (() => T)): [T, Dispatch<T>] => {
   const [value, setValue] = useState(() => {
     // @ts-ignore
     const init = getItem(key) || (typeof initialValue === 'function' ? initialValue() : initialValue);
-    setItem(key, init);
+    storageManager.set(init);
 
     return init;
   });
 
   const updateValue = (newValue: T | ((prevValue: T) => T)): void => {
     // @ts-ignore
-    const val = typeof newValue === 'function'? initialValue(value): initialValue;
-    setItem(key, newValue);
+    const val = typeof newValue === 'function' ? initialValue(value) : initialValue;
 
-    setValue(newValue);
+    storageManager.set(val);
+    setValue(val);
   };
 
   return [value, updateValue];
