@@ -26,7 +26,7 @@ Access localStorage easily inside your React component.
 
 ![react-native-js-tableview Android Screenshot](https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)
 
-## Documentation
+## Usage
 
 ### Function components (With Hooks) ⚓.
 
@@ -90,6 +90,36 @@ class App extends React.Component {
 
 ```
 
+## Documentation
+
+### useLocalStorage()
+```js
+const [value, setValue] = useLocalStorage(key, initialValue);
+```
+Returns a stateful value, and a function to update it.
+
+During the initial render, the returned value (`value`) will be the same as the value passed as the secound argument (`initialState`) if there is no data stored in the localStorage.
+
+#### Lazy initial value
+
+The `initialValue` argument is the value used during the initial render if there is no stored value in the localStorage. In subsequent renders, it is disregarded. If the initial value is the result of an expensive computation, you may provide a function instead, which will be executed only on the initial render:
+
+```js
+const [value, setValue] = useLocalStorage('__key__', () => {
+  const initialValue = someExpensiveComputation(props);
+  return initialValue;
+});
+
+```
+
+#### Functional updates
+If the new value is computed using the previous value, you can pass a function to `setValue`. The function will receive the previous value, and return an updated value. Here’s an example:
+
+```js
+const [them, setTheme] = useLocalStorage('__theme__', 'light');
+onToggleTheme = () =>
+  setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+```
 ## Authors
 
 * **Yaman KATBY** - *Initial work* - [Website](https://yaman.idewaxa.com/)
