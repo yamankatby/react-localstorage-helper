@@ -1,9 +1,25 @@
 {
  "name": "react-localstorage-helper",
- "version": "0.0.6",
+ "version": "0.0.7",
  "main": "lib/index.js",
  "types": "lib/index.d.ts",
  "license": "MIT",
+ "private": false,
+ "author": "Yaman KATBY <m.yaman.katby@gmail.com> (https://yaman.idewaxa.com/)",
+ "keywords": [
+  "react",
+  "localstorage",
+  "offline",
+  "browser storage",
+  "immutate",
+  "hooks support",
+  "helper"
+ ],
+ "homepage": "https://github.com/yamankatby/react-localstorage-helper.git",
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/yamankatby/react-localstorage-helper.git"
+ },
  "files": [
   "lib/**/*"
  ],
