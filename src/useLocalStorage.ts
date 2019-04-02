@@ -1,23 +1,17 @@
 import { Dispatch, useState } from 'react';
-import localstorage from './utilities/localstorage';
+import { storage } from './utilities/storage';
 
-type IUseLocalStorage<T> = [T, Dispatch<T>];
-
-const useLocalStorage = <T>(key: string, initialValue: T | (() => T)): IUseLocalStorage<T> => {
-  const storageManager = localstorage<T>(key);
+const useLocalStorage = <T>(key: string, initialValue: (() => T) | T | any): [T, Dispatch<T>] => {
+  const storageManager = storage<T>(key);
 
   const [value, setValue] = useState(() => {
-    // @ts-ignore
-    const init = getItem(key) || (typeof initialValue === 'function' ? initialValue() : initialValue);
+    const init = storageManager.get() || (typeof initialValue === 'function' ? initialValue() : initialValue);
     storageManager.set(init);
-
     return init;
   });
 
-  const updateValue = (newValue: T | ((prevValue: T) => T)): void => {
-    // @ts-ignore
+  const updateValue = (newValue: ((prevValue: T) => T) | T | any): void => {
     const val = typeof newValue === 'function' ? initialValue(value) : initialValue;
-
     storageManager.set(val);
     setValue(val);
   };

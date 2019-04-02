@@ -1,9 +1,9 @@
-interface ILocalStorage<T> {
+interface IStorage<T> {
   get: () => T | null;
   set: (value: T) => void;
 }
 
-const localstorage = <T>(key: string): ILocalStorage<T> => {
+const storage = <T>(key: string): IStorage<T> => {
   const get = (): T | null => {
     const serializedValue = localStorage.getItem(key);
     if (serializedValue !== null) {
@@ -20,4 +20,4 @@ const localstorage = <T>(key: string): ILocalStorage<T> => {
   return { get, set };
 };
 
-export default localstorage;
+export { storage };
