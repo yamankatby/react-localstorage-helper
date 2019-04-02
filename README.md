@@ -19,7 +19,69 @@ yarn add react-localstorage-helper
 
 ## Getting Started
 
+![react-native-js-tableview Android Screenshot](https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)(https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)
 
+### Class components
+
+```jsx harmony
+import { localStorage } from 'react-localstorage-helper';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'Somebody', isDark: false };
+
+    this.updateName = localStorage('__name__', this.state.name, (newName) => {
+      this.setState(newName);
+    });
+
+    this.updateIsDark = localStorage('__isDark__', this.state.isDark, (newIsDark) => {
+        this.setState({ isDark: newIsDark });
+    });
+  }
+
+  render() {
+    return (
+      <div style={{ backgroundColor: isDark ? 'black' : 'white' }}>
+        <h1>Hello! {this.state.name}</h1>
+        <input onChange={(e) => this.updateName(e.currentTarget.value)} />
+
+        <input
+          type='checkbox'
+          value={isDark}
+          onChange={() => this.updateIsDark((preValue) => !preValue)}
+        />
+      </div>
+    );
+  }
+}
+
+```
+
+### Function components (With Hooks) ⚓.
+
+```jsx harmony
+import { useLocalStorage } from 'react-localstorage-helper';
+
+const App = () => {
+  const [name, setName] = useLocalStorage('__name__', 'Somebody');
+  const [isDark, setIsDark] = useLocalStorage('__isDark__', false);
+
+  return (
+    <div style={{ backgroundColor: isDark ? 'black' : 'white' }}>
+      <h1>Hello! {name}</h1>
+      <input onChange={(e) => setName(e.currentTarget.value)} />
+
+      <input
+        type='checkbox'
+        value={isDark}
+        onChange={() => setIsDark((preValue) => !preValue)}
+      />
+    </div>
+  );
+};
+
+```
 
 ## Authors
 
