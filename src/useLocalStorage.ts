@@ -1,7 +1,5 @@
 import { Dispatch, useState } from 'react';
 
-export type IValue<T> = T | ((value: T) => T) | any;
-
 const setItem = <T>(key: string, value: T): void => {
   const serializedValue = JSON.stringify(value);
   localStorage.setItem(key, serializedValue);
@@ -15,23 +13,20 @@ const getItem = <T>(key: string): T | null => {
   return null;
 };
 
-const useLocalStorage = <T>(key: string, initialValue: IValue<T>): [T | any, Dispatch<any>] => {
+const useLocalStorage = <T>(key: string, initialValue: T | (() => T)): [T, Dispatch<T>] => {
   const [value, setValue] = useState(() => {
-    let init = getItem(key);
-    if (init === null && typeof initialValue === 'function') {
-      init = initialValue();
-    }
-
+    // @ts-ignore
+    const init = getItem(key) || (typeof initialValue === 'function' ? initialValue() : initialValue);
     setItem(key, init);
+
     return init;
   });
 
-  const updateValue = (newValue: IValue<T>) => {
-    if (typeof newValue === 'function') {
-      newValue = newValue(value);
-    }
-
+  const updateValue = (newValue: T | ((prevValue: T) => T)): void => {
+    // @ts-ignore
+    const val = typeof newValue === 'function'? initialValue(value): initialValue;
     setItem(key, newValue);
+
     setValue(newValue);
   };
 
