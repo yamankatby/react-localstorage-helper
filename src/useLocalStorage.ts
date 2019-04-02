@@ -11,7 +11,7 @@ const useLocalStorage = <T>(key: string, initialValue: (() => T) | T | any): [T,
   });
 
   const updateValue = (newValue: ((prevValue: T) => T) | T | any): void => {
-    const val = typeof newValue === 'function' ? initialValue(value) : initialValue;
+    const val = typeof newValue === 'function' ? newValue(value) : newValue;
     storageManager.set(val);
     setValue(val);
   };
