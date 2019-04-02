@@ -24,6 +24,8 @@ Access localStorage easily inside your React component.
 - Listen to changes easily just by pass a `Callback function` 🔉.
 - No need to worry about encoding data to `JSON` and decoding it back.
 
+![react-localstorage-helper Overview](https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/overview.gif)
+
 ## Usage
 
 ### Function components (With Hooks) ⚓.
