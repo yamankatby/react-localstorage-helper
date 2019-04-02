@@ -19,9 +19,41 @@ yarn add react-localstorage-helper
 
 ## Getting Started
 
+Access localStorage easily inside your React component.
+- Full support to use localStorage with new `React Hooks` ⚓.
+- Listen to changes easily just by pass a `Callback function` 🔉.
+- No need to worry about encoding data to `JSON` and decoding it back.
+
 ![react-native-js-tableview Android Screenshot](https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)(https://raw.githubusercontent.com/yamankatby/react-localstorage-helper/master/assets/overview.gif)
 
-### Class components
+### Function components (With Hooks) ⚓.
+
+```jsx harmony
+import { useLocalStorage } from 'react-localstorage-helper';
+
+const App = () => {
+  const [name, setName] = useLocalStorage('__name__', 'Somebody');
+  const [isDark, setIsDark] = useLocalStorage('__isDark__', false);
+
+  return (
+    <div style={{ backgroundColor: isDark ? 'black' : 'white' }}>
+      <h1>Hello! {name}</h1>
+      <input onChange={(e) => setName(e.currentTarget.value)} />
+
+      <input
+        type='checkbox'
+        value={isDark}
+        onChange={() => setIsDark((preValue) => !preValue)}
+      />
+    </div>
+  );
+};
+
+```
+
+## Documentation
+
+### Class components (With Callback Function) 🔉.
 
 ```jsx harmony
 import { localStorage } from 'react-localstorage-helper';
@@ -55,31 +87,6 @@ class App extends React.Component {
     );
   }
 }
-
-```
-
-### Function components (With Hooks) ⚓.
-
-```jsx harmony
-import { useLocalStorage } from 'react-localstorage-helper';
-
-const App = () => {
-  const [name, setName] = useLocalStorage('__name__', 'Somebody');
-  const [isDark, setIsDark] = useLocalStorage('__isDark__', false);
-
-  return (
-    <div style={{ backgroundColor: isDark ? 'black' : 'white' }}>
-      <h1>Hello! {name}</h1>
-      <input onChange={(e) => setName(e.currentTarget.value)} />
-
-      <input
-        type='checkbox'
-        value={isDark}
-        onChange={() => setIsDark((preValue) => !preValue)}
-      />
-    </div>
-  );
-};
 
 ```
 
