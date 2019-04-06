@@ -140,8 +140,9 @@ If the new value is computed using the previous value, you can pass a function t
 **Class component:**
 
 ```js
-this.updateTheme = localStorage('__theme__', 'light', this.handleValueChange);
-this.updateTheme((prevValue) => (prevTheme === 'light' ? 'dark' : 'light'));
+this.updateTheme = localStorage('__theme__', 'light', this.handleValueChange); 
+onToggleTheme = () =>
+  this.updateTheme((prevValue) => (prevTheme === 'light' ? 'dark' : 'light'));
 ```
 
 **Function component:**
