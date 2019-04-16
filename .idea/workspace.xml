@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19d7c5f2-0a54-49e9-a17a-fdf7a06e4f37" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="19d7c5f2-0a54-49e9-a17a-fdf7a06e4f37" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,10 +14,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/useLocalStorage.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="736">
+                <caret line="134" column="60" lean-forward="true" selection-start-line="134" selection-start-column="60" selection-end-line="134" selection-end-column="60" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -50,11 +50,11 @@
         <option value="$PROJECT_DIR$/src/localstorage.ts" />
         <option value="$PROJECT_DIR$/src/types/localstorage.ts" />
         <option value="$PROJECT_DIR$/src/utilities/storage.ts" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/localStorage.ts" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/index.ts" />
         <option value="$PROJECT_DIR$/src/useLocalStorage.ts" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -72,6 +72,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -79,16 +80,10 @@
               <item name="react-localstorage-helper" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-localstorage-helper" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="react-localstorage-helper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-localstorage-helper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -158,11 +153,12 @@
       <workItem from="1554382325383" duration="79000" />
       <workItem from="1554382475505" duration="1697000" />
       <workItem from="1554384985852" duration="18000" />
+      <workItem from="1555397003550" duration="254000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36178000" />
+    <option name="totallyTimeSpent" value="36432000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1370" extended-state="0" />
@@ -262,16 +258,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1216">
-            <caret line="128" selection-start-line="128" selection-end-line="128" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -312,8 +298,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/useLocalStorage.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <state relative-caret-position="315">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="736">
+            <caret line="134" column="60" lean-forward="true" selection-start-line="134" selection-start-column="60" selection-end-line="134" selection-end-column="60" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
