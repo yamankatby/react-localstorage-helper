@@ -31,63 +31,65 @@ Access localStorage easily inside your React component.
 ### Function components (With Hooks) ⚓.
 
 ```jsx harmony
-import { useLocalStorage } from 'react-localstorage-helper';
+import { useLocalStorage } from "react-localstorage-helper";
 
 const App = () => {
-  const [name, setName] = useLocalStorage('__name__', 'Somebody');
-  const [isDark, setIsDark] = useLocalStorage('__isDark__', false);
+  const [name, setName] = useLocalStorage("__name__", "Somebody");
+  const [isDark, setIsDark] = useLocalStorage("__isDark__", false);
 
   return (
-    <div style={{ backgroundColor: isDark ? 'black' : 'white' }}>
+    <div style={{ backgroundColor: isDark ? "black" : "white" }}>
       <h1>Hello! {name}</h1>
-      <input onChange={(e) => setName(e.currentTarget.value)} />
+      <input onChange={e => setName(e.currentTarget.value)} />
 
       <input
-        type='checkbox'
+        type="checkbox"
         value={isDark}
-        onChange={() => setIsDark((preValue) => !preValue)}
+        onChange={() => setIsDark(preValue => !preValue)}
       />
     </div>
   );
 };
-
 ```
 
 ### Class components (With Callback Function) 🔉.
 
 ```jsx harmony
-import { localStorage } from 'react-localstorage-helper';
+import { localStorage } from "react-localstorage-helper";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: 'Somebody', isDark: false };
+    this.state = { name: "Somebody", isDark: false };
 
-    this.updateName = localStorage('__name__', this.state.name, (newName) => {
+    this.updateName = localStorage("__name__", this.state.name, newName => {
       this.setState(newName);
     });
 
-    this.updateIsDark = localStorage('__isDark__', this.state.isDark, (newIsDark) => {
+    this.updateIsDark = localStorage(
+      "__isDark__",
+      this.state.isDark,
+      newIsDark => {
         this.setState({ isDark: newIsDark });
-    });
+      }
+    );
   }
 
   render() {
     return (
-      <div style={{ backgroundColor: isDark ? 'black' : 'white' }}>
+      <div style={{ backgroundColor: isDark ? "black" : "white" }}>
         <h1>Hello! {this.state.name}</h1>
-        <input onChange={(e) => this.updateName(e.currentTarget.value)} />
+        <input onChange={e => this.updateName(e.currentTarget.value)} />
 
         <input
-          type='checkbox'
+          type="checkbox"
           value={isDark}
-          onChange={() => this.updateIsDark((preValue) => !preValue)}
+          onChange={() => this.updateIsDark(preValue => !preValue)}
         />
       </div>
     );
   }
 }
-
 ```
 
 ## Documentation
@@ -117,7 +119,9 @@ The `initialValue` argument is the value used during the initial render if there
 **Class component:**
 
 ```js
-this.updateValue = localStorage('__key__', () => {
+this.updateValue = localStorage(
+  "__key__",
+  () => {
     const initialValue = someExpensiveComputation(props);
     return initialValue;
   },
@@ -128,7 +132,7 @@ this.updateValue = localStorage('__key__', () => {
 **Function component:**
 
 ```js
-const [value, setValue] = useLocalStorage('__key__', () => {
+const [value, setValue] = useLocalStorage("__key__", () => {
   const initialValue = someExpensiveComputation(props);
   return initialValue;
 });
@@ -140,16 +144,16 @@ If the new value is computed using the previous value, you can pass a function t
 **Class component:**
 
 ```js
-this.updateTheme = localStorage('__theme__', 'light', this.handleValueChange);
-this.updateTheme((prevValue) => (prevTheme === 'light' ? 'dark' : 'light'));
+this.updateTheme = localStorage("__theme__", "light", this.handleValueChange);
+this.updateTheme(prevValue => (prevTheme === "light" ? "dark" : "light"));
 ```
 
 **Function component:**
 
 ```js
-const [them, setTheme] = useLocalStorage('__theme__', 'light');
+const [them, setTheme] = useLocalStorage("__theme__", "light");
 onToggleTheme = () =>
-  setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
 ```
 ## Authors
 
