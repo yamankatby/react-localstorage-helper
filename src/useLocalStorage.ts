@@ -12,6 +12,7 @@ export default <S>(key: string, initialValue: (() => S) | S | any): [S, Dispatch
   const storageManager = storage<S>(key);
 
   const [value, setValue] = useState(() => {
+    if (typeof window === "undefined") return ""
     const init = storageManager.get() || (typeof initialValue === 'function' ? initialValue() : initialValue);
     storageManager.set(init);
     return init;
